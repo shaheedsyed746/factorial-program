@@ -1,9 +1,11 @@
 
+
 pipeline {
     agent any
 
     environment {
         PYTHON = 'C:/Users/shahe/anaconda3/python.exe'
+        DOCKER = 'C:/Users/shahe/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe'
     }
 
     stages {
@@ -14,9 +16,10 @@ pipeline {
             }
         }
 
-        stage('Check Python') {
+        stage('Check Tools') {
             steps {
                 bat '"%PYTHON%" --version'
+                bat '"%DOCKER%" version'
             }
         }
 
@@ -34,7 +37,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t factorial-app:1.0 .'
+                bat '"%DOCKER%" build -t factorial-app:1.0 .'
             }
         }
 
