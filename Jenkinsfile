@@ -2,23 +2,33 @@
 pipeline {
     agent any
 
+    environment {
+        PYTHON = 'C:/Users/shahe/anaconda3/python.exe'
+    }
+
     stages {
 
-        stage('Checkout') {
+        stage('GitHub Checkout') {
             steps {
-                echo 'Factorial project checkout completed'
+                echo 'GitHub checkout successful'
+            }
+        }
+
+        stage('Check Python') {
+            steps {
+                bat '"%PYTHON%" --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
+                bat '"%PYTHON%" -m pip install -r requirements.txt'
             }
         }
 
         stage('Run Unit Tests') {
             steps {
-                bat 'python -m pytest -v tests/test_factorial.py'
+                bat '"%PYTHON%" -m pytest -v tests/test_factorial.py'
             }
         }
 
@@ -30,7 +40,7 @@ pipeline {
 
         stage('Run Selenium Tests') {
             steps {
-                bat 'python -m pytest -v tests/test_selenium.py'
+                bat '"%PYTHON%" -m pytest -v tests/test_selenium.py'
             }
         }
     }
