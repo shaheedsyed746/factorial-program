@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Factorial Calculator</title>
+</head>
+<body>
+    <h1>Factorial Calculator</h1>
+
+    <form method="POST">
+        <input type="number" name="number"
+               id="number" placeholder="Enter number" required>
+
+        <button type="submit" id="calculate">
+            Calculate
+        </button>
+    </form>
+
+    {% if result is not none %}
+        <h2 id="result">Result: {{ result }}</h2>
+    {% endif %}
+</body>
+</html>
